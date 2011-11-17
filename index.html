@@ -16,9 +16,11 @@
 <br>
 <span id="result"></span>
 <br>
-<canvas id="canvas" width="200" height="200" style="border:1px solid black"></canvas>
-<br>
-<span id="stats"></span>
+<canvas id="canvas" width="200" height="200" style="border:1px solid black;"></canvas>
+<h2>Purpose</h2>
+<p>The goal of this application is to simulate how ants use pheromone trails to signal to other ants the path to food.</p>
+<h2>How it works</h2>
+<p>Each ant, represented by a black dot moves at random. If it finds food (yellow circles), it makes it's way back to the nest, leaving a pheromone trail. If other ants find this pheromone trail, they follow it to the food, and leave their own trail as they bring the food back to the nest. The width of the green line represents the strength of the pheromone trail.</p>
 
 <script type="text/javascript">
 function Point(x,y){
