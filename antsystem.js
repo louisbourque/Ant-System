@@ -26,7 +26,10 @@ var gamestate;
 function ants_init(){
 	canvas = document.getElementById('canvas');
 	ctx = canvas.getContext("2d");
-	
+	(function animloop(){
+      requestAnimFrame(animloop, canvas);
+      draw_state();
+    })();
 	worker = new Worker("ants.js");
 	worker.onerror = function(error) {
 		console.log(error.message);
@@ -70,12 +73,13 @@ function handle_worker_message_ants(data){
 	}
 	if(resultObj.act == "update"){
 		gamestate = resultObj.data;
-		draw_state();
 		return true;
 	}
 }
 
 function draw_state(){
+	if(typeof(gamestate) == 'undefined' || !gamestate.hasChanged){return;}
+	gamestate.hasChanged = false;
 	ctx.clearRect(0, 0, config.grid_x, config.grid_x);
 	ctx.fillStyle = "#000";
 	ctx.beginPath();
@@ -112,6 +116,18 @@ function draw_state(){
 	}*/
 		
 }
+
+// shim layer with setTimeout fallback
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       || 
+		  window.webkitRequestAnimationFrame || 
+		  window.mozRequestAnimationFrame    || 
+		  window.oRequestAnimationFrame      || 
+		  window.msRequestAnimationFrame     || 
+		  function(/* function */ callback, /* DOMElement */ element){
+			window.setTimeout(callback, 1000 / 60);
+		  };
+})();
 
 //start the simulation
 function start(){

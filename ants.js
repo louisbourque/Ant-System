@@ -66,6 +66,7 @@ onmessage = function(event) {
 			}
 			gamestate.runCount = 0;
 			gamestate.foodCount = 0;
+			gamestate.hasChanged = true;
 			var message = new Object();
 			message.act = "update";
 			message.data = gamestate;
@@ -74,6 +75,7 @@ onmessage = function(event) {
 		case 'place_food':
 				gamestate.food.shift();
 				gamestate.food.push(new Food(message.data.x,message.data.y,config.food_size));
+				gamestate.hasChanged = true;
 				var message = new Object();
 				message.act = "update";
 				message.data = gamestate;
@@ -90,6 +92,7 @@ onmessage = function(event) {
 function run(){
 	if(tock_count <= 0){
 		gamestate.runCount++;
+		gamestate.hasChanged = true;
 		var message = new Object();
 		message.act = "update";
 		message.data = gamestate;
