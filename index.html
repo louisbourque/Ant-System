@@ -5,13 +5,12 @@
 <script type="text/javascript" src="antsystem.js"></script>
 
 </head>
-<body>
+<body onload="ants_init();">
 
 <input type="text" id="num_ants" value="19" size="5"><label for="num_ants"> ants, </label>
 <input type="text" id="num_food" value="5" size="5"><label for="num_food"> food pellets </label>
 <label for="food_size">of size </label><input type="text" id="food_size" value="32" size="5">.
 <label for="pheromone_evaporation_rate">Pheromone evaporates after </label><input type="text" id="pheromone_evaporation_rate" value="200" size="5"> cycles.
-<input type="button" value="Initialize" onclick="ants_init();">&nbsp;&nbsp;
 <input type="button" value="Run" onclick="start();">&nbsp;&nbsp;
 <input type="button" style="color:red;" value="Stop" onclick="stop();">&nbsp;&nbsp;
 <br>
