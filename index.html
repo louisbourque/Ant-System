@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<input type="text" id="num_ants" value="50" size="5"><label for="num_ants"> ants, </label>
+<input type="text" id="num_ants" value="19" size="5"><label for="num_ants"> ants, </label>
 <input type="text" id="num_food" value="5" size="5"><label for="num_food"> food pellets </label>
 <label for="food_size">of size </label><input type="text" id="food_size" value="32" size="5">.
 <label for="pheromone_evaporation_rate">Pheromone evaporates after </label><input type="text" id="pheromone_evaporation_rate" value="200" size="5"> cycles.
@@ -62,6 +62,10 @@ function ants_init(){
 		message.data.y = event.pageY-offset.top;
 		worker.postMessage(JSON.stringify(message));
 	});
+	//limit number of ants to 19, Firefox seems to limit number of subworkers
+	if($('#num_ants').val() > 19){
+		$('#num_ants').val(19);
+	}
 	config.num_ants = parseInt($('#num_ants').val());
 	config.num_food = parseInt($('#num_food').val());
 	config.food_size = parseInt($('#food_size').val());
